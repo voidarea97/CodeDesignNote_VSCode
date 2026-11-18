@@ -1,0 +1,44 @@
+{
+  "name": "code-design-notes",
+  "displayName": "代码设计批注",
+  "description": "让 Markdown 设计说明对应到代码行，并在分栏中查看说明和跳转。",
+  "version": "0.1.0",
+  "publisher": "commenttool",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "main": "./src/extension.js",
+  "activationEvents": ["workspaceContains:**/*.codedoc.md"],
+  "scripts": {
+    "check": "node --check src/format.js && node --check src/index.js && node --check src/panel.js && node --check src/extension.js && node --check media/panel.js"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": { "supported": true },
+    "virtualWorkspaces": { "supported": true }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "codedoc.open",
+        "category": "代码设计批注",
+        "title": "打开代码批注页",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "codedoc.add",
+        "category": "代码设计批注",
+        "title": "为当前行或选区添加说明",
+        "enablement": "editorIsOpen && workbenchState != empty"
+      }
+    ],
+    "menus": {
+      "editor/title": [
+        { "command": "codedoc.open", "when": "resource && workbenchState != empty", "group": "navigation@50" }
+      ],
+      "editor/context": [
+        { "command": "codedoc.add", "when": "resource && workbenchState != empty && !(resourceFilename =~ /\\.codedoc\\.md$/)", "group": "navigation@50" }
+      ]
+    }
+  }
+}

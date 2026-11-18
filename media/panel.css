@@ -1,0 +1,141 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--vscode-foreground);
+  background: var(--vscode-editor-background);
+  font: var(--vscode-font-size)/1.6 var(--vscode-font-family);
+}
+
+header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  padding: 16px clamp(12px, 4vw, 26px) 12px;
+  background: var(--vscode-editor-background);
+  border-bottom: 1px solid var(--vscode-panel-border);
+}
+
+.location, .toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.location h1 {
+  flex: 1 1 12ch;
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.15em;
+  line-height: 1.4;
+  font-weight: 650;
+}
+
+#line, .note-lines, .muted, .reference-path, .empty { color: var(--vscode-descriptionForeground); }
+#line { white-space: nowrap; }
+.toolbar { margin-top: 12px; }
+.toolbar[hidden] { display: none; }
+.modes { display: flex; flex-wrap: wrap; gap: 4px; }
+
+button {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: inherit;
+  background: transparent;
+  font: inherit;
+}
+
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 1px solid var(--vscode-focusBorder);
+  outline-offset: 2px;
+}
+
+.modes button, .primary { padding: 3px 10px; }
+.modes button:hover, .modes [aria-pressed='true'] { background: var(--vscode-toolbar-hoverBackground); }
+.modes [aria-pressed='true'] { border-color: var(--vscode-contrastActiveBorder, var(--vscode-panel-border)); }
+
+.primary {
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-background);
+  border-color: var(--vscode-button-border, transparent);
+}
+.primary:hover { background: var(--vscode-button-hoverBackground); }
+
+main {
+  display: grid;
+  gap: 12px;
+  max-width: 860px;
+  margin-inline: auto;
+  padding: 16px clamp(12px, 4vw, 26px) 32px;
+}
+
+.empty { margin: 3px 0; }
+.note {
+  min-width: 0;
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 7px;
+  background: var(--vscode-sideBar-background, var(--vscode-editor-background));
+}
+.note.matching { border-color: var(--vscode-focusBorder); }
+
+.note-title {
+  margin: 0;
+  padding: 12px 14px 0;
+  overflow-wrap: anywhere;
+  font-size: 1.1em;
+  font-weight: 650;
+}
+summary.note-title { padding-bottom: 12px; cursor: pointer; }
+.note-lines { margin-inline-start: 12px; font-size: .83em; font-weight: 400; }
+.note-content { padding: 4px 14px 12px; }
+
+.location-link, .action-link, .reference {
+  color: var(--vscode-textLink-foreground);
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+.location-link:hover, .action-link:hover, .reference:hover, .markdown a:hover {
+  color: var(--vscode-textLink-activeForeground);
+  text-decoration: underline;
+}
+.location-link, .action-link { padding: 0; }
+.location-link, .reference-path { font: .92em/1.55 var(--vscode-editor-font-family); }
+
+.markdown { margin: 12px 0; overflow-wrap: anywhere; }
+.markdown :first-child { margin-top: 0; }
+.markdown :last-child { margin-bottom: 0; }
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 { font-size: 1.08em; }
+.markdown a { color: var(--vscode-textLink-foreground); }
+.markdown code { font-family: var(--vscode-editor-font-family); }
+.markdown :not(pre) > code {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--vscode-textCodeBlock-background);
+}
+.markdown pre {
+  overflow: auto;
+  padding: 10px;
+  border-radius: 4px;
+  background: var(--vscode-textCodeBlock-background);
+}
+.markdown blockquote {
+  margin-inline: 0;
+  padding: 6px 12px;
+  border-inline-start: 2px solid var(--vscode-textBlockQuote-border);
+  background: var(--vscode-textBlockQuote-background);
+}
+.markdown table { border-collapse: collapse; }
+.markdown td, .markdown th { padding: 3px 8px; border: 1px solid var(--vscode-panel-border); }
+.plaintext { white-space: pre-wrap; }
+
+.related, .actions { border-top: 1px solid var(--vscode-panel-border); }
+.related { padding: 10px 0; }
+.related h3 { margin: 0 0 3px; font-size: 1em; }
+.related ul { margin: 0; padding: 0; list-style: none; }
+.reference { display: block; width: 100%; padding: 3px 0; }
+.reference-path { display: block; }
+.actions { padding-top: 8px; }
